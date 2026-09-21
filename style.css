@@ -1,4 +1,24 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .playground {
+    background-color: red;
+    height: 60%;
+    width: 60%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+}
+
+.query>button {
+    border-radius: 10%;
+    height: 60px;
+    padding: 6%;
+    margin-top: 8%;
 }
