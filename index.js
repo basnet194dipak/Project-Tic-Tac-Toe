@@ -1,5 +1,8 @@
 let game_board = Array(9).fill(-1)
 
+// at the beginning the number of choice computer can use.
+let computer_options = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
 let win_idx = [// horizontal check
     [1, 2, 3],
     [4, 5, 6],
@@ -52,14 +55,15 @@ function check(player, idx) {
         return "invalid"
     }
     if (player.check_winner()) {
-        return `${player.marker} won the game`
+        console.log( `${player.marker} won the game`)
+        return true
     }
     return null
 }
 
 // play game
 function play_game(turn, idx) {
-    if (turn == true) {
+    if (turn == "player") {
         return check(player_one, idx)
     }
     else {
@@ -67,32 +71,38 @@ function play_game(turn, idx) {
     }
 }
 
+// get computer choice
+function computer_choice()
+{
+    var idx =  Math.floor(Math.random() * computer_options.length)
+    return computer_options[idx]
+}
+
 // playground
 
 function playground() {
-    let move = 0
-    let turn = true
-    while (move < 9) {
-        let index = prompt("Enter the index between 1 to 9")
-        index = Number(index) - 1
-        let win = play_game(turn, index)
-        if (win == "invalid") {
-            continue
-        }
-        move++
-        if (win == null) {
-            turn = !turn
-        }
-        else {
-            console.log(win)
+    while (computer_options.length != 0) {
+        let index = prompt(`Enter the index between 1 to 9 ${game_board}`)
+        let player_index = Number(index) - 1
+
+        // remove the selected index by player from computer available options. 
+        computer_options.splice(player_index,1)
+        let computer_index = computer_choice()
+        // remove the selected index by computer. 
+        computer_options.splice(computer_index,1)
+
+        // check if human won
+        let human_win = play_game("player", player_index)
+
+        // check if computer_won
+        let computer_win = play_game("computer", computer_index)
+        if (human_win == true || computer_win == true) {
             break
         }
+        }
 
     }
-    if (move == 9) {
-        console.log("Draw")
-    }
 
-}
+
 
 playground()
