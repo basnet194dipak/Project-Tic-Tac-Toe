@@ -14,6 +14,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     place-items: center;
+    gap: 0px;
 }
 
 .query>button {
@@ -21,4 +22,16 @@
     height: 60px;
     padding: 6%;
     margin-top: 8%;
+}
+
+.playground > div
+{
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    height: 33%;
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }

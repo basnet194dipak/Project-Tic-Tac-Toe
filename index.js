@@ -1,7 +1,7 @@
 let game_board = Array(9).fill(-1)
 
 // at the beginning the number of choice computer can use.
-let computer_options = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+let computer_options = [1, 2, 3, 4, 5, 6, 7, 8,9];
 
 let win_idx = [// horizontal check
     [1, 2, 3],
@@ -78,48 +78,61 @@ function computer_choice()
     return computer_options[idx]
 }
 
-// playground
+// display choosen option 
 
-function playground() {
-    while (computer_options.length != 0) {
-        let index = prompt(`Enter the index between 1 to 9 ${game_board}`)
-        let player_index = Number(index) - 1
-
-        // remove the selected index by player from computer available options. 
-        computer_options.splice(player_index,1)
-        let computer_index = computer_choice()
-        // remove the selected index by computer. 
-        computer_options.splice(computer_index,1)
-
-        // check if human won
-        let human_win = play_game("player", player_index)
-
-        // check if computer_won
-        let computer_win = play_game("computer", computer_index)
-        if (human_win == true || computer_win == true) {
-            break
-        }
-        }
-
+function display_mark(id, mark)
+{
+    let hello = document.getElementById(id)
+    if (hello.innerText != "X" && hello.innerText != "O")
+    {
+        hello.innerText = mark
     }
-
-
-
-// playground()
+}
 
 // build a grid
 function build_playground() {
     playground = document.querySelector(".playground")
     for (let i = 0; i < 9; i++) {
-        div = document.createElement("button")
+        div = document.createElement("div")
         div.setAttribute("id", i)
-        div.innerText = i
+        
         div.addEventListener("click", () => {
-            // fill this later
+            human_mark = "O"
+            computer_mark = "X"
+            display_mark(i,human_mark)
+
+            // remove the selected index by player from computer available options. 
+            computer_options.splice(computer_options.indexOf(i + 1), 1);
+
+            let computer_index = computer_choice();
+
+            computer_options.splice(computer_options.indexOf(computer_index), 1);
+
+            computer_index -= 1;
+
+            display_mark(computer_index,computer_mark)
+
+            // check if human won
+            let human_win = play_game("player", i)
+
+            // check if computer_won
+            let computer_win = play_game("computer", computer_index)
+            if (human_win == true ) {
+                alert("Human won the game")
+            }
+
+            if (computer_win == true)
+            {
+                alert("Computer won the game")
+            }
+
+            if (game_board.every(position => position !== -1)) 
+            {
+                alert("It's a draw!");
+            }
         })
         playground.appendChild(div)
     }
-
 
 }
 document.addEventListener("DOMContentLoaded", () => {
