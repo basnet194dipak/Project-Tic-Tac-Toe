@@ -138,3 +138,19 @@ function build_playground() {
 document.addEventListener("DOMContentLoaded", () => {
     build_playground()
 })
+
+// restart game
+hello = document.querySelector(".query")
+hello.addEventListener("click",()=>{
+    // reset the playground 
+    playground = document.querySelector(".playground")
+    playground.innerText = null
+
+    // reset the computer options and playarea 
+    game_board = Array(9).fill(-1)
+
+    // at the beginning the number of choice computer can use.
+    computer_options = [1, 2, 3, 4, 5, 6, 7, 8,9];
+
+    build_playground()
+})
