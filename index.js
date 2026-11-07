@@ -83,7 +83,7 @@ function computer_choice()
 function display_mark(id, mark)
 {
     let hello = document.getElementById(id)
-    if (hello.innerText != "X" && hello.innerText != "O")
+    if (hello && hello.innerText != "X" && hello.innerText != "O")
     {
         hello.innerText = mark
     }
@@ -97,12 +97,28 @@ function build_playground() {
         div.setAttribute("id", i)
         
         div.addEventListener("click", () => {
-            human_mark = "O"
-            computer_mark = "X"
-            display_mark(i,human_mark)
+            if (game_board[i] !== -1) {
+                return;
+            }
+
+            display_mark(i,"O")
+
+            // check if human won
+            let human_win = play_game("player", i)
 
             // remove the selected index by player from computer available options. 
             computer_options.splice(computer_options.indexOf(i + 1), 1);
+
+            if (human_win === true ) {
+                alert("Human won the game")
+            }
+
+            else if (game_board.every(position => position !== -1)) 
+            {
+                console.log(game_board)
+                alert("It's a draw!");
+                return;
+            }
 
             let computer_index = computer_choice();
 
@@ -110,31 +126,28 @@ function build_playground() {
 
             computer_index -= 1;
 
-            display_mark(computer_index,computer_mark)
+            display_mark(computer_index,"X")
 
-            // check if human won
-            let human_win = play_game("player", i)
+            
 
             // check if computer_won
             let computer_win = play_game("computer", computer_index)
-            if (human_win == true ) {
-                setTimeout(() => {
-                alert("Human won the game")
-                }, 100);
-                
-            }
+            
 
-            else if (computer_win == true)
+            if (computer_win == true)
             {
-                setTimeout(() => {
                 alert("Computer won the game")
-                }, 100);
+
+                return
             }
 
-            if (game_board.every(position => position !== -1)) 
+            else if (game_board.every(position => position !== -1)) 
             {
+                console.log(game_board)
                 alert("It's a draw!");
+                return;
             }
+            
         })
         playground.appendChild(div)
     }
