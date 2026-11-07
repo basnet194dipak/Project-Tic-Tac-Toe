@@ -2,7 +2,6 @@ let game_board = Array(9).fill(-1)
 
 // at the beginning the number of choice computer can use.
 let computer_options = [1, 2, 3, 4, 5, 6, 7, 8,9];
-
 let win_idx = [// horizontal check
     [1, 2, 3],
     [4, 5, 6],
@@ -44,8 +43,10 @@ function Player(name, marker) {
     }
 }
 
-const player_one = new Player("first", "O")
-const player_two = new Player("second", "X")
+let player_name = prompt("Enter your name: ")
+
+const player_one = new Player(player_name, "O")
+const player_two = new Player("Computer", "X")
 
 
 function check(player, idx) {
@@ -111,7 +112,7 @@ function build_playground() {
 
             if (human_win === true ) {
                 setTimeout(()=>{
-                    alert("Human won the game")
+                    alert(`${player_name} won the game`)
                 },100)
 
                 return
