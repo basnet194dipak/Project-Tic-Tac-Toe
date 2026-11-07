@@ -118,12 +118,17 @@ function build_playground() {
             // check if computer_won
             let computer_win = play_game("computer", computer_index)
             if (human_win == true ) {
+                setTimeout(() => {
                 alert("Human won the game")
+                }, 100);
+                
             }
 
-            if (computer_win == true)
+            else if (computer_win == true)
             {
+                setTimeout(() => {
                 alert("Computer won the game")
+                }, 100);
             }
 
             if (game_board.every(position => position !== -1)) 
