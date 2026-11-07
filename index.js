@@ -110,13 +110,19 @@ function build_playground() {
             computer_options.splice(computer_options.indexOf(i + 1), 1);
 
             if (human_win === true ) {
-                alert("Human won the game")
+                setTimeout(()=>{
+                    alert("Human won the game")
+                },100)
+
+                return
             }
 
             else if (game_board.every(position => position !== -1)) 
             {
                 console.log(game_board)
-                alert("It's a draw!");
+
+                setTimeout(()=>{alert("It's a draw!");},100)
+                
                 return;
             }
 
@@ -136,15 +142,17 @@ function build_playground() {
 
             if (computer_win == true)
             {
-                alert("Computer won the game")
+                setTimeout(()=>{
+                    alert("Computer won the game")
+                },100)
+                
 
                 return
             }
 
             else if (game_board.every(position => position !== -1)) 
             {
-                console.log(game_board)
-                alert("It's a draw!");
+                setTimeout(()=>{alert("It's a draw!");},100)
                 return;
             }
             
@@ -153,22 +161,21 @@ function build_playground() {
     }
 
 }
-document.addEventListener("DOMContentLoaded", () => {
-    build_playground()
-})
-
 // restart game
-hello = document.querySelector(".query")
-hello.addEventListener("click",()=>{
-    // reset the playground 
-    playground = document.querySelector(".playground")
-    playground.innerText = null
+document.addEventListener("DOMContentLoaded", () => {
 
-    // reset the computer options and playarea 
-    game_board = Array(9).fill(-1)
+    build_playground();
 
-    // at the beginning the number of choice computer can use.
-    computer_options = [1, 2, 3, 4, 5, 6, 7, 8,9];
+    const hello = document.querySelector(".query");
 
-    build_playground()
-})
+    hello.addEventListener("click", () => {
+
+        game_board = Array(9).fill(-1);
+
+        computer_options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        document.querySelector(".playground").replaceChildren();
+
+        build_playground();
+    });
+});
