@@ -10,7 +10,7 @@ A browser-based **Tic Tac Toe game** built using HTML, CSS, and JavaScript. Play
 
 <!-- Add a screenshot or GIF of your project here -->
 
-![alt text](image.png)
+![Screenshot of project](image.png)
 
 <!-- ![Tic Tac Toe Preview](./preview.png) -->
 
